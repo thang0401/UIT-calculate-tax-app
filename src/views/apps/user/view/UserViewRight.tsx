@@ -22,8 +22,6 @@ import Icon from 'src/@core/components/icon'
 import UserViewBilling from 'src/views/apps/user/view/UserViewBilling'
 import UserViewAccount from 'src/views/apps/user/view/UserViewAccount'
 import UserViewSecurity from 'src/views/apps/user/view/UserViewSecurity'
-import UserViewConnection from 'src/views/apps/user/view/UserViewConnection'
-import UserViewNotification from 'src/views/apps/user/view/UserViewNotification'
 
 // ** Types
 import { InvoiceType } from 'src/types/apps/invoiceTypes'

@@ -12,6 +12,7 @@ export type UsersType = {
   country: string
   contact: string
   taxCode: string
+
   /** Lương cứng (VNĐ) — phục vụ tính thuế TNCN, không hiển thị trên bảng danh sách */
   baseSalary: number
   fullName: string

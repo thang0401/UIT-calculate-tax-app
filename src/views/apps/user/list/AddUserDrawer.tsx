@@ -47,6 +47,7 @@ interface UserData {
   fullName: string
   username: string
   status: 'active' | 'inactive'
+
   /** Lương cứng VNĐ — dùng cho tính thuế, không hiển thị trên bảng */
   baseSalary: number
 }

@@ -11,7 +11,6 @@ import Select from '@mui/material/Select'
 import Switch from '@mui/material/Switch'
 import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
-import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import InputLabel from '@mui/material/InputLabel'
@@ -21,7 +20,6 @@ import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import LinearProgress from '@mui/material/LinearProgress'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import DialogContentText from '@mui/material/DialogContentText'
 
@@ -47,19 +45,19 @@ interface ColorsType {
 
 const data: UsersType = {
   id: 1,
-  role: 'admin',
+  role: 'client',
   status: 'active',
-  username: 'minhanh@uit.edu.vn',
+  username: 'thangnc@uit.edu.vn',
   billing: 'Theo bảng lương',
   avatarColor: 'primary',
   country: 'Việt Nam',
   company: 'Phòng Hành chính — Đại học Công nghệ Thông tin',
-  contact: '0901122334',
+  contact: '0335874542',
   taxCode: '0314999888',
   baseSalary: 22000000,
   currentPlan: 'basic',
-  fullName: 'Nguyễn Thị Minh Anh',
-  email: 'minhanh@uit.edu.vn',
+  fullName: 'Nguyễn Cao Thăng',
+  email: 'thangnc@uit.edu.vn',
   password: '0314999888',
   avatar: '/images/avatars/10.png'
 }
@@ -81,37 +79,15 @@ const statusColors: ColorsType = {
   inactive: 'secondary'
 }
 
-// ** Styled <sup> component
-const Sup = styled('sup')(({ theme }) => ({
-  top: '0.25rem',
-  left: '-1rem',
-  fontSize: '1.125rem',
-  position: 'absolute',
-  color: theme.palette.primary.main
-}))
-
-// ** Styled <sub> component
-const Sub = styled('sub')(({ theme }) => ({
-  fontSize: '1rem',
-  marginTop: '0.5rem',
-  alignSelf: 'flex-end',
-  color: theme.palette.text.secondary
-}))
-
 const UserViewLeft = () => {
   // ** States
   const [openEdit, setOpenEdit] = useState<boolean>(false)
-  const [openPlans, setOpenPlans] = useState<boolean>(false)
   const [suspendDialogOpen, setSuspendDialogOpen] = useState<boolean>(false)
   const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState<boolean>(false)
 
   // Handle Edit dialog
   const handleEditClickOpen = () => setOpenEdit(true)
   const handleEditClose = () => setOpenEdit(false)
-
-  // Handle Upgrade Plan dialog
-  const handlePlansClickOpen = () => setOpenPlans(true)
-  const handlePlansClose = () => setOpenPlans(false)
 
   if (data) {
     return (

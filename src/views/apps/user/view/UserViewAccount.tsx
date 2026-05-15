@@ -45,9 +45,9 @@ const Timeline = styled(MuiTimeline)<TimelineProps>(({ theme }) => ({
 const UserViewOverview = ({ invoiceData }: Props) => {
   return (
     <Grid container spacing={6}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <UsersProjectListTable />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Card>
           <CardHeader title='User Activity Timeline' />

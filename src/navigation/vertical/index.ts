@@ -3,32 +3,32 @@ import { VerticalNavItemsType } from 'src/@core/layouts/types'
 
 const navigation = (): VerticalNavItemsType => {
   return [
-    {
-      sectionTitle: 'Báo cáo Thống kê'
-    },
-    {
-      title: 'Dashboards',
-      icon: 'bx:home-circle',
+    // {
+    //   sectionTitle: 'Báo cáo Thống kê'
+    // },
+    // {
+    //   title: 'Dashboards',
+    //   icon: 'bx:home-circle',
 
-      // badgeContent: 'new',
-      badgeColor: 'error',
-      children: [
-        {
-          title: 'Analytics',
-          path: '/dashboards/analytics'
-        }
+    //   // badgeContent: 'new',
+    //   badgeColor: 'error',
+    //   children: [
+    //     {
+    //       title: 'Analytics',
+    //       path: '/dashboards/analytics'
+    //     }
 
-        // ,{
-        //   title: 'Thống kê',
-        //   path: '/dashboards/crm'
-        // }
+    // ,{
+    //   title: 'Thống kê',
+    //   path: '/dashboards/crm'
+    // }
 
-        // {
-        //   title: 'eCommerce',
-        //   path: '/dashboards/ecommerce'
-        // }
-      ]
-    },
+    // {
+    //   title: 'eCommerce',
+    //   path: '/dashboards/ecommerce'
+    // }
+    //   ]
+    // },
 
     // {
     //   sectionTitle: 'Ứng dụng'
@@ -113,7 +113,7 @@ const navigation = (): VerticalNavItemsType => {
       //     ]
       //   }
       // ]
-    },
+    }
 
     // {
     //   title: 'quyền truy cập',
@@ -152,56 +152,56 @@ const navigation = (): VerticalNavItemsType => {
     //     }
     //   ]
     // },
-    {
-      title: 'Pages',
-      icon: 'bx:dock-top',
-      children: [
-        {
-          title: 'FAQ',
-          path: '/pages/faq'
-        },
-        {
-          title: 'Help Center',
-          path: '/pages/help-center'
-        },
+    // {
+    //   title: 'Pages',
+    //   icon: 'bx:dock-top',
+    //   children: [
+    //     {
+    //       title: 'FAQ',
+    //       path: '/pages/faq'
+    //     },
+    //     {
+    //       title: 'Help Center',
+    //       path: '/pages/help-center'
+    //     },
 
-        // {
-        //   title: 'Pricing',
-        //   path: '/pages/pricing'
-        // }
+    // {
+    //   title: 'Pricing',
+    //   path: '/pages/pricing'
+    // }
 
-        {
-          title: 'Miscellaneous',
-          children: [
-            // {
-            //   openInNewTab: true,
-            //   title: 'Coming Soon',
-            //   path: '/pages/misc/coming-soon'
-            // },
-            {
-              openInNewTab: true,
-              title: 'Under Maintenance',
-              path: '/pages/misc/under-maintenance'
-            },
-            {
-              openInNewTab: true,
-              title: 'Page Not Found - 404',
-              path: '/pages/misc/404-not-found'
-            },
-            {
-              openInNewTab: true,
-              title: 'Not Authorized - 401',
-              path: '/pages/misc/401-not-authorized'
-            },
-            {
-              openInNewTab: true,
-              title: 'Server Error - 500',
-              path: '/pages/misc/500-server-error'
-            }
-          ]
-        }
-      ]
-    }
+    // {
+    //  title: 'Miscellaneous',
+    //   children: [
+    // {
+    //   openInNewTab: true,
+    //   title: 'Coming Soon',
+    //   path: '/pages/misc/coming-soon'
+    // },
+    //     {
+    //       openInNewTab: true,
+    //       title: 'Under Maintenance',
+    //       path: '/pages/misc/under-maintenance'
+    //     },
+    //     {
+    //       openInNewTab: true,
+    //       title: 'Page Not Found - 404',
+    //       path: '/pages/misc/404-not-found'
+    //     },
+    //     {
+    //       openInNewTab: true,
+    //       title: 'Not Authorized - 401',
+    //       path: '/pages/misc/401-not-authorized'
+    //     },
+    //     {
+    //       openInNewTab: true,
+    //       title: 'Server Error - 500',
+    //       path: '/pages/misc/500-server-error'
+    //     }
+    //   ]
+    // }
+    // ]
+    // }
 
     // {
     //   title: 'Cài đặt',

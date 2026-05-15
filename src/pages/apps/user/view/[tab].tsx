@@ -14,6 +14,11 @@ const UserView = ({ tab, invoiceData }: InferGetStaticPropsType<typeof getStatic
   return <UserViewPage tab={tab} invoiceData={invoiceData} />
 }
 
+UserView.acl = {
+  action: 'read',
+  subject: 'user-view'
+}
+
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [

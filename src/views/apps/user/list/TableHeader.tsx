@@ -17,6 +17,7 @@ interface TableHeaderProps {
   toggle: () => void
   handleFilter: (val: string) => void
   onExport?: () => void
+
   /** Khi không có bản ghi trên lưới, vô hiệu hóa xuất */
   disableExport?: boolean
 }

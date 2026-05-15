@@ -189,7 +189,7 @@ const LoginPage = () => {
               Admin: <strong>admin@uit.edu.vn</strong> / Pass: <strong>admin</strong>
             </Typography>
             <Typography variant='caption' sx={{ display: 'block', color: 'primary.main' }}>
-              Client: <strong>client@sneat.com</strong> / Pass: <strong>client</strong>
+              Client: <strong>thangnc@uit.edu.vn</strong> / Pass: <strong>client</strong>
             </Typography>
           </Alert>
           <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit, onInvalid)}>

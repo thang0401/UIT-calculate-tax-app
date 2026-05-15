@@ -55,6 +55,7 @@ function getMockTtlSeconds(): number {
 function createAccessToken(userId: number): string {
   const exp = Math.floor(Date.now() / 1000) + getMockTtlSeconds()
   const payload: MockTokenPayload = { id: userId, exp }
+
   return `${MOCK_TOKEN_PREFIX}${base64UrlEncode(JSON.stringify(payload))}`
 }
 
@@ -99,13 +100,11 @@ const users: UserDataType[] = [
     id: 2,
     role: 'client',
     password: 'client',
-    fullName: 'Jane Doe',
-    username: 'janedoe',
-    email: 'client@sneat.com'
+    fullName: 'Nguyễn Cao Thăng',
+    username: 'thangnc',
+    email: 'thangnc@uit.edu.vn'
   }
 ]
-
-type ResponseType = [number, { [key: string]: any }]
 
 function parseRequestBody(data: unknown): Record<string, unknown> {
   if (data == null) return {}
@@ -223,9 +222,8 @@ mock.onGet('/auth/me').reply(config => {
     if (!userRecord) {
       return [401, { error: { error: 'Invalid User' } }]
     }
-    const { password: _p, ...userData } = JSON.parse(JSON.stringify(userRecord)) as UserDataType & {
-      password: string
-    }
+    const userData = JSON.parse(JSON.stringify(userRecord)) as UserDataType
+    Reflect.deleteProperty(userData, 'password')
 
     return [200, { userData }]
   }
