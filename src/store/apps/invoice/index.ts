@@ -7,6 +7,8 @@ import axios from 'axios'
 
 interface DataParams {
   q: string
+  quy?: string
+  nam?: string
   dates?: Date[]
   status: string
 }

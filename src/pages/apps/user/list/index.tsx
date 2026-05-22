@@ -1,24 +1,29 @@
 // ** React Imports
-import { useState, useEffect, MouseEvent, useCallback, useMemo } from 'react'
+import { useState, useEffect, MouseEvent, SyntheticEvent, useCallback, useMemo } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
+import Tab from '@mui/material/Tab'
 import Menu from '@mui/material/Menu'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
+import TabPanel from '@mui/lab/TabPanel'
+import TabContext from '@mui/lab/TabContext'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import CardContent from '@mui/material/CardContent'
+import MuiTabList, { TabListProps } from '@mui/lab/TabList'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
@@ -53,6 +58,7 @@ import { CardStatsHorizontalProps } from 'src/@core/components/card-statistics/t
 // ** Custom Table Components Imports
 import TableHeader from 'src/views/apps/user/list/TableHeader'
 import AddUserDrawer from 'src/views/apps/user/list/AddUserDrawer'
+import PitRecordsPanel from 'src/views/apps/tax/pit/PitRecordsPanel'
 
 interface UserRoleType {
   [key: string]: { icon: string; color: string }
@@ -86,6 +92,24 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   color: theme.palette.text.secondary,
   '&:hover': {
     color: theme.palette.primary.main
+  }
+}))
+
+const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
+  minHeight: 40,
+  '& .MuiTabs-indicator': {
+    display: 'none'
+  },
+  '& .MuiTab-root': {
+    minHeight: 40,
+    textTransform: 'none',
+    paddingTop: theme.spacing(2.5),
+    paddingBottom: theme.spacing(2.5),
+    borderRadius: theme.shape.borderRadius,
+    '&.Mui-selected': {
+      color: theme.palette.common.white,
+      backgroundColor: theme.palette.primary.main
+    }
   }
 }))
 
@@ -187,13 +211,24 @@ const UserList = ({ apiData }: InferGetStaticPropsType<typeof getStaticProps>) =
   const [role, setRole] = useState<string>('')
   const [value, setValue] = useState<string>('')
   const [status, setStatus] = useState<string>('')
+  const [activeTab, setActiveTab] = useState<string>('users')
   const [addUserOpen, setAddUserOpen] = useState<boolean>(false)
   const [editingUser, setEditingUser] = useState<UsersType | null>(null)
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
 
   // ** Hooks
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
   const store = useSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    const tab = Array.isArray(router.query.tab) ? router.query.tab[0] : router.query.tab
+    if (tab === 'pit' || tab === 'users') {
+      setActiveTab(tab)
+    } else {
+      setActiveTab('users')
+    }
+  }, [router.query.tab])
 
   useEffect(() => {
     dispatch(
@@ -216,6 +251,22 @@ const UserList = ({ apiData }: InferGetStaticPropsType<typeof getStaticProps>) =
   const handleStatusChange = useCallback((e: SelectChangeEvent) => {
     setStatus(e.target.value)
   }, [])
+
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent, newValue: string) => {
+      setActiveTab(newValue)
+
+      const nextQuery = { ...router.query }
+      if (newValue === 'pit') {
+        nextQuery.tab = 'pit'
+      } else {
+        delete nextQuery.tab
+      }
+
+      void router.replace({ pathname: router.pathname, query: nextQuery }, undefined, { shallow: true })
+    },
+    [router]
+  )
 
   const handleOpenEdit = useCallback((user: UsersType) => {
     setEditingUser(user)
@@ -399,67 +450,104 @@ const UserList = ({ apiData }: InferGetStaticPropsType<typeof getStaticProps>) =
         )}
       </Grid>
       <Grid item xs={12}>
-        <Card>
-          <CardHeader title='Bộ lọc tìm kiếm' />
-          <CardContent>
-            <Grid container spacing={5}>
-              <Grid item sm={4} xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id='role-select'>Chọn vai trò</InputLabel>
-                  <Select
-                    fullWidth
-                    value={role}
-                    id='select-role'
-                    label='Chọn vai trò'
-                    labelId='role-select'
-                    onChange={handleRoleChange}
-                    inputProps={{ placeholder: 'Chọn vai trò' }}
-                  >
-                    <MenuItem value=''>Tất cả vai trò</MenuItem>
-                    <MenuItem value='admin'>Admin</MenuItem>
-                    <MenuItem value='accountant'>Kế toán</MenuItem>
-                    <MenuItem value='staff_teacher'>Nhân viên / Giảng viên</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item sm={4} xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id='status-select'>Chọn trạng thái</InputLabel>
-                  <Select
-                    fullWidth
-                    value={status}
-                    id='select-status'
-                    label='Chọn trạng thái'
-                    labelId='status-select'
-                    onChange={handleStatusChange}
-                    inputProps={{ placeholder: 'Chọn trạng thái' }}
-                  >
-                    <MenuItem value=''>Tất cả trạng thái</MenuItem>
-                    <MenuItem value='active'>Đang hoạt động</MenuItem>
-                    <MenuItem value='inactive'>Ngưng hoạt động</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </Grid>
-          </CardContent>
-          <Divider sx={{ m: '0 !important' }} />
-          <TableHeader
-            value={value}
-            handleFilter={handleFilter}
-            toggle={openCreateDrawer}
-            onExport={handleExportUsers}
-            disableExport={store.data.length === 0}
-          />
-          <DataGrid
-            autoHeight
-            rows={store.data}
-            columns={columns}
-            disableRowSelectionOnClick
-            pageSizeOptions={[10, 25, 50]}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-          />
-        </Card>
+        <TabContext value={activeTab}>
+          <Card sx={{ mb: 6 }}>
+            <TabList
+              variant='scrollable'
+              scrollButtons='auto'
+              onChange={handleTabChange}
+              aria-label='user management tabs'
+              sx={{ px: 4, pt: 3, pb: 3 }}
+            >
+              <Tab
+                value='users'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2 } }}>
+                    <Icon icon='bx:user' />
+                    Nhân viên
+                  </Box>
+                }
+              />
+              <Tab
+                value='pit'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2 } }}>
+                    <Icon icon='bx:calculator' />
+                    Thành phần TNCN
+                  </Box>
+                }
+              />
+            </TabList>
+          </Card>
+
+          <TabPanel value='users' sx={{ p: 0, border: 0, boxShadow: 0, backgroundColor: 'transparent' }}>
+            <Card>
+              <CardHeader title='Bộ lọc tìm kiếm' />
+              <CardContent>
+                <Grid container spacing={5}>
+                  <Grid item sm={4} xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel id='role-select'>Chọn vai trò</InputLabel>
+                      <Select
+                        fullWidth
+                        value={role}
+                        id='select-role'
+                        label='Chọn vai trò'
+                        labelId='role-select'
+                        onChange={handleRoleChange}
+                        inputProps={{ placeholder: 'Chọn vai trò' }}
+                      >
+                        <MenuItem value=''>Tất cả vai trò</MenuItem>
+                        <MenuItem value='admin'>Admin</MenuItem>
+                        <MenuItem value='accountant'>Kế toán</MenuItem>
+                        <MenuItem value='staff_teacher'>Nhân viên / Giảng viên</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item sm={4} xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel id='status-select'>Chọn trạng thái</InputLabel>
+                      <Select
+                        fullWidth
+                        value={status}
+                        id='select-status'
+                        label='Chọn trạng thái'
+                        labelId='status-select'
+                        onChange={handleStatusChange}
+                        inputProps={{ placeholder: 'Chọn trạng thái' }}
+                      >
+                        <MenuItem value=''>Tất cả trạng thái</MenuItem>
+                        <MenuItem value='active'>Đang hoạt động</MenuItem>
+                        <MenuItem value='inactive'>Ngưng hoạt động</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </CardContent>
+              <Divider sx={{ m: '0 !important' }} />
+              <TableHeader
+                value={value}
+                handleFilter={handleFilter}
+                toggle={openCreateDrawer}
+                onExport={handleExportUsers}
+                disableExport={store.data.length === 0}
+              />
+              <DataGrid
+                autoHeight
+                rows={store.data}
+                columns={columns}
+                disableRowSelectionOnClick
+                pageSizeOptions={[10, 25, 50]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
+              />
+            </Card>
+          </TabPanel>
+
+          <TabPanel value='pit' sx={{ p: 0, border: 0, boxShadow: 0, backgroundColor: 'transparent' }}>
+            <PitRecordsPanel />
+          </TabPanel>
+        </TabContext>
       </Grid>
 
       <AddUserDrawer open={addUserOpen} toggle={closeDrawer} userToEdit={editingUser} />

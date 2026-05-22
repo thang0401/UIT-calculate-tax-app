@@ -54,28 +54,16 @@ const navigation = (): VerticalNavItemsType => {
     //   path: '/apps/calendar'
     // },
     {
-      title: 'hoá đơn',
+      title: 'Thu nhập',
       icon: 'bx:food-menu',
       path: '/apps/invoice/list'
-
-      // children: [
-      //   {
-      //     title: 'List',
-      //     path: '/apps/invoice/list'
-      //   },
-      //   {
-      //     title: 'Preview',
-      //     path: '/apps/invoice/preview'
-      //   },
-      //   {
-      //     title: 'Edit',
-      //     path: '/apps/invoice/edit'
-      //   },
-      //   {
-      //     title: 'Add',
-      //     path: '/apps/invoice/add'
-      //   }
-      // ]
+    },
+    {
+      title: 'Tính thuế TNCN',
+      icon: 'bx:receipt',
+      path: '/apps/tax/pit/calculate',
+      action: 'read',
+      subject: 'tax-calculate-page'
     },
     {
       title: 'Nhân viên',

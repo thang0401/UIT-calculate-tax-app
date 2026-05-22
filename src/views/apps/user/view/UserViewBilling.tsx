@@ -5,30 +5,30 @@ import { useState, ChangeEvent } from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Alert from '@mui/material/Alert'
-import Table from '@mui/material/Table'
+
+// import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import Select from '@mui/material/Select'
 import Switch from '@mui/material/Switch'
-import Divider from '@mui/material/Divider'
+
+// import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
-import TableRow from '@mui/material/TableRow'
-import { styled } from '@mui/material/styles'
-import TableCell from '@mui/material/TableCell'
-import TableBody from '@mui/material/TableBody'
+
+//import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
-import AlertTitle from '@mui/material/AlertTitle'
+
+// import AlertTitle from '@mui/material/AlertTitle'
 import InputLabel from '@mui/material/InputLabel'
 import CardContent from '@mui/material/CardContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import LinearProgress from '@mui/material/LinearProgress'
-import TableContainer from '@mui/material/TableContainer'
+
+// import LinearProgress from '@mui/material/LinearProgress'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import DialogContentText from '@mui/material/DialogContentText'
 
@@ -41,26 +41,21 @@ import Cards, { Focused } from 'react-credit-cards'
 
 // ** Demo Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
-import CustomRadioIcons from 'src/@core/components/custom-radio/icons'
-import UserSubscriptionDialog from 'src/views/apps/user/view/UserSubscriptionDialog'
+
+//import UserSubscriptionDialog from 'src/views/apps/user/view/UserSubscriptionDialog'
 
 // ** Util Import
 import { formatCVC, formatExpirationDate, formatCreditCardNumber } from 'src/@core/utils/format'
 
 // ** Types
 import { ThemeColor } from 'src/@core/layouts/types'
-import { CustomRadioIconsData, CustomRadioIconsProps } from 'src/@core/components/custom-radio/types'
 
 // ** Styled Component Imports
 import CardWrapper from 'src/@core/styles/libs/react-credit-cards'
 
 // ** Styles Import
-import 'react-credit-cards/es/styles-compiled.css'
+// import 'react-credit-cards/es/styles-compiled.css'
 
-interface IconType {
-  icon: CustomRadioIconsProps['icon']
-  iconProps: CustomRadioIconsProps['iconProps']
-}
 interface DataType {
   name: string
   imgSrc: string
@@ -73,19 +68,19 @@ interface DataType {
 }
 
 // ** Styled <sup> component
-const Sup = styled('sup')(({ theme }) => ({
-  top: '0.2rem',
-  left: '-0.6rem',
-  position: 'absolute',
-  color: theme.palette.primary.main
-}))
+// const Sup = styled('sup')(({ theme }) => ({
+//   top: '0.2rem',
+//   left: '-0.6rem',
+//   position: 'absolute',
+//   color: theme.palette.primary.main
+// }))
 
 // ** Styled <sub> component
-const Sub = styled('sub')({
-  fontWeight: 300,
-  fontSize: '1rem',
-  alignSelf: 'flex-end'
-})
+// const Sub = styled('sub')({
+//   fontWeight: 300,
+//   fontSize: '1rem',
+//   alignSelf: 'flex-end'
+// })
 
 const data: DataType[] = [
   {
@@ -116,30 +111,7 @@ const data: DataType[] = [
   }
 ]
 
-const radioData: CustomRadioIconsData[] = [
-  {
-    value: 'home',
-    title: 'Home',
-    isSelected: true,
-    content: 'Delivery time (9am – 9pm)'
-  },
-  {
-    value: 'office',
-    title: 'Office',
-    content: 'Delivery time (9am – 5pm)'
-  }
-]
-
-const icons: IconType[] = [
-  { icon: 'bx:home', iconProps: { fontSize: '2rem', style: { marginBottom: 16 } } },
-  { icon: 'bx:briefcase', iconProps: { fontSize: '2rem', style: { marginBottom: 16 } } }
-]
-
 const UserViewBilling = () => {
-  const initialSelected: string = radioData.filter(item => item.isSelected)[
-    radioData.filter(item => item.isSelected).length - 1
-  ].value
-
   // ** States
   const [cvc, setCvc] = useState<string>('')
   const [name, setName] = useState<string>('')
@@ -148,11 +120,10 @@ const UserViewBilling = () => {
   const [expiry, setExpiry] = useState<string>('')
   const [cardNumber, setCardNumber] = useState<string>('')
   const [dialogTitle, setDialogTitle] = useState<string>('Add')
-  const [selected, setSelected] = useState<string>(initialSelected)
   const [openEditCard, setOpenEditCard] = useState<boolean>(false)
-  const [openAddressCard, setOpenAddressCard] = useState<boolean>(false)
-  const [openUpgradePlans, setOpenUpgradePlans] = useState<boolean>(false)
-  const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState<boolean>(false)
+
+  // const [openUpgradePlans, setOpenUpgradePlans] = useState<boolean>(false)
+  // const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState<boolean>(false)
 
   // Handle Edit Card dialog and get card ID
   const handleEditCardClickOpen = (id: number) => {
@@ -184,8 +155,8 @@ const UserViewBilling = () => {
   }
 
   // Handle Upgrade Plan dialog
-  const handleUpgradePlansClickOpen = () => setOpenUpgradePlans(true)
-  const handleUpgradePlansClose = () => setOpenUpgradePlans(false)
+  // const handleUpgradePlansClickOpen = () => setOpenUpgradePlans(true)
+  // const handleUpgradePlansClose = () => setOpenUpgradePlans(false)
 
   const handleBlur = () => setFocus(undefined)
 
@@ -202,17 +173,9 @@ const UserViewBilling = () => {
     }
   }
 
-  const handleChange = (prop: string | ChangeEvent<HTMLInputElement>) => {
-    if (typeof prop === 'string') {
-      setSelected(prop)
-    } else {
-      setSelected((prop.target as HTMLInputElement).value)
-    }
-  }
-
   return (
     <Grid container spacing={6}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Card>
           <CardHeader title='Current plan' />
           <CardContent>
@@ -369,7 +332,7 @@ const UserViewBilling = () => {
             </DialogContent>
           </Dialog>
         </Card>
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12}>
         <Card>

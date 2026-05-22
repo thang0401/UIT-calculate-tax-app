@@ -6,6 +6,7 @@ import defaultAuthConfig from 'src/configs/auth'
 
 // ** Types
 import { UserDataType } from 'src/context/types'
+import { clientEmployee } from 'src/@fake-db/apps/employees'
 
 /**
  * Fake JWT-style tokens for axios-mock only.
@@ -92,17 +93,19 @@ const users: UserDataType[] = [
     id: 1,
     role: 'admin',
     password: 'admin',
-    fullName: 'Nguyễn Cao Thăng',
-    username: 'thangnc',
+    fullName: 'Quản trị viên',
+    username: 'admin',
     email: 'admin@uit.edu.vn'
   },
   {
     id: 2,
     role: 'client',
     password: 'client',
-    fullName: 'Nguyễn Cao Thăng',
-    username: 'thangnc',
-    email: 'thangnc@uit.edu.vn'
+    fullName: clientEmployee.fullName,
+    username: clientEmployee.username,
+    email: clientEmployee.email,
+    taxCode: clientEmployee.taxCode,
+    avatar: clientEmployee.avatar || null
   }
 ]
 

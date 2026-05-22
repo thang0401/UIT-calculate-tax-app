@@ -1,27 +1,34 @@
 // ** React Imports
 import { useState } from 'react'
 
-// ** Next Import
-// import Link from 'next/link'
-
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
+import TextField from '@mui/material/TextField'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
-import ImportExcelModal from './import/ImportExcelModal'
+import PitImportExcelModal from './import/PitImportExcelModal'
 
-interface TableHeaderProps {
+interface PitTableHeaderProps {
+  value: string
+  handleFilter: (val: string) => void
+  onAdd?: () => void
   onExport?: () => void
   onImported?: () => void
   disableExport?: boolean
 }
 
-const TableHeader = (props: TableHeaderProps) => {
-  const { onExport, onImported, disableExport = false } = props
+const PitTableHeader = ({
+  value,
+  handleFilter,
+  onAdd,
+  onExport,
+  onImported,
+  disableExport = false
+}: PitTableHeaderProps) => {
   const [importOpen, setImportOpen] = useState(false)
 
   return (
@@ -30,7 +37,6 @@ const TableHeader = (props: TableHeaderProps) => {
         sx={{
           p: 5,
           pb: 3,
-          width: '100%',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -39,6 +45,9 @@ const TableHeader = (props: TableHeaderProps) => {
         }}
       >
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 4, rowGap: 2 }}>
+          <Button variant='contained' startIcon={<Icon icon='bx:plus' fontSize={20} />} onClick={onAdd}>
+            Nhập tay
+          </Button>
           <Tooltip title='Mở hộp thoại nhập file theo template'>
             <Button
               color='secondary'
@@ -49,9 +58,7 @@ const TableHeader = (props: TableHeaderProps) => {
               Nhập Excel
             </Button>
           </Tooltip>
-          <Tooltip
-            title={disableExport ? 'Chưa có dữ liệu để xuất' : 'Tải xuống bảng thu nhập theo khoản tiền hiện tại (CSV)'}
-          >
+          <Tooltip title={disableExport ? 'Chưa có dữ liệu để xuất' : 'Tải xuống bảng thành phần TNCN (CSV)'}>
             <span>
               <Button
                 color='secondary'
@@ -65,14 +72,17 @@ const TableHeader = (props: TableHeaderProps) => {
             </span>
           </Tooltip>
         </Box>
-        {/* <Button component={Link} variant='contained' href='/apps/invoice/add'>
-          Thêm khoản thu nhập
-        </Button> */}
+        <TextField
+          size='small'
+          value={value}
+          sx={{ minWidth: 240 }}
+          placeholder='Tìm họ tên / MST'
+          onChange={e => handleFilter(e.target.value)}
+        />
       </Box>
-
-      <ImportExcelModal open={importOpen} onClose={() => setImportOpen(false)} onImported={onImported} />
+      <PitImportExcelModal open={importOpen} onClose={() => setImportOpen(false)} onImported={onImported} />
     </>
   )
 }
 
-export default TableHeader
+export default PitTableHeader

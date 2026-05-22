@@ -1,46 +1,47 @@
 // ** MUI Imports
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
+// import Box from '@mui/material/Box'
+// import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Avatar from '@mui/material/Avatar'
-import Tooltip from '@mui/material/Tooltip'
-import { styled } from '@mui/material/styles'
-import TimelineDot from '@mui/lab/TimelineDot'
-import TimelineItem from '@mui/lab/TimelineItem'
-import CardHeader from '@mui/material/CardHeader'
-import Typography from '@mui/material/Typography'
-import AvatarGroup from '@mui/material/AvatarGroup'
-import CardContent from '@mui/material/CardContent'
-import TimelineContent from '@mui/lab/TimelineContent'
-import TimelineSeparator from '@mui/lab/TimelineSeparator'
-import TimelineConnector from '@mui/lab/TimelineConnector'
-import MuiTimeline, { TimelineProps } from '@mui/lab/Timeline'
+
+// import Avatar from '@mui/material/Avatar'
+// import Tooltip from '@mui/material/Tooltip'
+// import { styled } from '@mui/material/styles'
+
+// import TimelineDot from '@mui/lab/TimelineDot'
+// import TimelineItem from '@mui/lab/TimelineItem'
+// import CardHeader from '@mui/material/CardHeader'
+// import Typography from '@mui/material/Typography'
+// import AvatarGroup from '@mui/material/AvatarGroup'
+// import CardContent from '@mui/material/CardContent'
+// import TimelineContent from '@mui/lab/TimelineContent'
+// import TimelineSeparator from '@mui/lab/TimelineSeparator'
+// import TimelineConnector from '@mui/lab/TimelineConnector'
+// import MuiTimeline, { TimelineProps } from '@mui/lab/Timeline'
 
 // ** Types
 import { InvoiceType } from 'src/types/apps/invoiceTypes'
 
 // ** Demo Component Imports
 import UsersInvoiceListTable from 'src/views/apps/user/view/UsersInvoiceListTable'
-import UsersProjectListTable from 'src/views/apps/user/view/UsersProjectListTable'
 
 interface Props {
   invoiceData: InvoiceType[]
 }
 
 // Styled Timeline component
-const Timeline = styled(MuiTimeline)<TimelineProps>(({ theme }) => ({
-  margin: 0,
-  padding: 0,
-  marginLeft: theme.spacing(0.75),
-  '& .MuiTimelineItem-root': {
-    '&:before': {
-      display: 'none'
-    },
-    '&:last-child': {
-      minHeight: 60
-    }
-  }
-}))
+// const Timeline = styled(MuiTimeline)<TimelineProps>(({ theme }) => ({
+//   margin: 0,
+//   padding: 0,
+//   marginLeft: theme.spacing(0.75),
+//   '& .MuiTimelineItem-root': {
+//     '&:before': {
+//       display: 'none'
+//     },
+//     '&:last-child': {
+//       minHeight: 60
+//     }
+//   }
+// }))
 
 const UserViewOverview = ({ invoiceData }: Props) => {
   return (
@@ -48,7 +49,7 @@ const UserViewOverview = ({ invoiceData }: Props) => {
       {/* <Grid item xs={12}>
         <UsersProjectListTable />
       </Grid> */}
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Card>
           <CardHeader title='User Activity Timeline' />
           <CardContent>
@@ -185,7 +186,7 @@ const UserViewOverview = ({ invoiceData }: Props) => {
             </Timeline>
           </CardContent>
         </Card>
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12}>
         <UsersInvoiceListTable invoiceData={invoiceData} />
