@@ -220,14 +220,14 @@ const TaxCalculationPage = () => {
     [incomeRows, pitRows, quyValue, namValue, isClientRole, userEmail, userTaxCode]
   )
 
-  const visibleIncomeRows = useMemo(
-    () =>
-      incomeRows
-        .filter(row => matchesPeriod(row, quyValue, namValue) && isAllowedEmployee(row.taxCode, row.email))
-        .sort((a, b) => a.fullName.localeCompare(b.fullName, 'vi') || a.id - b.id),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [incomeRows, quyValue, namValue, isClientRole, userEmail, userTaxCode]
-  )
+  // const visibleIncomeRows = useMemo(
+  //   () =>
+  //     incomeRows
+  //       .filter(row => matchesPeriod(row, quyValue, namValue) && isAllowedEmployee(row.taxCode, row.email))
+  //       .sort((a, b) => a.fullName.localeCompare(b.fullName, 'vi') || a.id - b.id),
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   [incomeRows, quyValue, namValue, isClientRole, userEmail, userTaxCode]
+  // )
 
   const yearOptions = useMemo(() => {
     const years = new Set<number>()
@@ -346,63 +346,63 @@ const TaxCalculationPage = () => {
     []
   )
 
-  const incomeDetailColumns = useMemo<GridColDef[]>(
-    () => [
-      {
-        flex: 0.2,
-        minWidth: 180,
-        field: 'fullName',
-        headerName: 'Nhân viên',
-        renderCell: ({ row }: { row: InvoiceType }) => (
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>{row.fullName}</Typography>
-            <Typography variant='caption' sx={{ color: 'text.disabled' }}>
-              {row.taxCode}
-            </Typography>
-          </Box>
-        )
-      },
-      {
-        flex: 0.1,
-        minWidth: 90,
-        field: 'period',
-        headerName: 'Kỳ',
-        renderCell: ({ row }: { row: InvoiceType }) => (
-          <Chip size='small' label={`Q${row.quy}/${row.nam}`} color='primary' variant='outlined' />
-        )
-      },
-      {
-        flex: 0.36,
-        minWidth: 280,
-        field: 'tenKhoanTien',
-        headerName: 'Tên khoản tiền',
-        renderCell: ({ row }: { row: InvoiceType }) => (
-          <Typography sx={{ color: 'text.secondary' }}>{row.tenKhoanTien}</Typography>
-        )
-      },
-      {
-        flex: 0.14,
-        minWidth: 130,
-        field: 'amount',
-        headerName: 'Amount',
-        renderCell: ({ row }: { row: InvoiceType }) => (
-          <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>{formatVnd(row.amount)}</Typography>
-        )
-      },
-      {
-        flex: 0.14,
-        minWidth: 130,
-        field: 'paymentDate',
-        headerName: 'Ngày chi trả',
-        renderCell: ({ row }: { row: InvoiceType }) => (
-          <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-            {row.paymentDate ?? ''}
-          </Typography>
-        )
-      }
-    ],
-    []
-  )
+  // const incomeDetailColumns = useMemo<GridColDef[]>(
+  //   () => [
+  //     {
+  //       flex: 0.2,
+  //       minWidth: 180,
+  //       field: 'fullName',
+  //       headerName: 'Nhân viên',
+  //       renderCell: ({ row }: { row: InvoiceType }) => (
+  //         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+  //           <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>{row.fullName}</Typography>
+  //           <Typography variant='caption' sx={{ color: 'text.disabled' }}>
+  //             {row.taxCode}
+  //           </Typography>
+  //         </Box>
+  //       )
+  //     },
+  //     {
+  //       flex: 0.1,
+  //       minWidth: 90,
+  //       field: 'period',
+  //       headerName: 'Kỳ',
+  //       renderCell: ({ row }: { row: InvoiceType }) => (
+  //         <Chip size='small' label={`Q${row.quy}/${row.nam}`} color='primary' variant='outlined' />
+  //       )
+  //     },
+  //     {
+  //       flex: 0.36,
+  //       minWidth: 280,
+  //       field: 'tenKhoanTien',
+  //       headerName: 'Tên khoản tiền',
+  //       renderCell: ({ row }: { row: InvoiceType }) => (
+  //         <Typography sx={{ color: 'text.secondary' }}>{row.tenKhoanTien}</Typography>
+  //       )
+  //     },
+  //     {
+  //       flex: 0.14,
+  //       minWidth: 130,
+  //       field: 'amount',
+  //       headerName: 'Amount',
+  //       renderCell: ({ row }: { row: InvoiceType }) => (
+  //         <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>{formatVnd(row.amount)}</Typography>
+  //       )
+  //     },
+  //     {
+  //       flex: 0.14,
+  //       minWidth: 130,
+  //       field: 'paymentDate',
+  //       headerName: 'Ngày chi trả',
+  //       renderCell: ({ row }: { row: InvoiceType }) => (
+  //         <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+  //           {row.paymentDate ?? ''}
+  //         </Typography>
+  //       )
+  //     }
+  //   ],
+  //   []
+  // )
 
   return (
     <Grid container spacing={6}>
