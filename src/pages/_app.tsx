@@ -51,17 +51,18 @@ import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 
 // ** Prismjs Styles
 import 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
+
+//import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/components/prism-tsx'
 
 // ** React Perfect Scrollbar Style
-import 'react-perfect-scrollbar/dist/css/styles.css'
+// import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
-import '../../styles/globals.css'
+//import '../../styles/globals.css'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -121,11 +122,8 @@ const App = (props: ExtendedAppProps) => {
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>{`${themeConfig.templateName} - Booking Engine`}</title>
-          <meta
-            name='description'
-            content={`${themeConfig.templateName} –provide airport-related services, including passenger transfers with vehicles ranging from standard to premium, fast-track immigration services, and long-distance intercity rides`}
-          />
+          <title>{`${themeConfig.templateName} - Thuế thu nhập cá nhân`}</title>
+          <meta name='description' content={`${themeConfig.templateName} – Phần mềm quản lý thuế thu nhập`} />
           <meta name='keywords' content='' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
         </Head>
