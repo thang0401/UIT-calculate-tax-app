@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo, useCallback, SyntheticEvent } from 'react
 import toast from 'react-hot-toast'
 
 // ** Next Import
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -44,7 +44,8 @@ import { getInitials } from 'src/@core/utils/get-initials'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
-import OptionsMenu from 'src/@core/components/option-menu'
+
+//import OptionsMenu from 'src/@core/components/option-menu'
 import TableHeader from 'src/views/apps/invoice/list/TableHeader'
 
 interface CellType {
@@ -228,7 +229,7 @@ const InvoiceList = () => {
                 <Icon icon='bx:trash-alt' fontSize={20} />
               </IconButton>
             </Tooltip>
-            <Tooltip title='Xem chi tiết'>
+            {/* <Tooltip title='Xem chi tiết'>
               <IconButton size='small' component={Link} href={`/apps/invoice/preview/${row.id}`}>
                 <Icon icon='bx:show' fontSize={20} />
               </IconButton>
@@ -241,7 +242,7 @@ const InvoiceList = () => {
                 { text: 'Sửa', href: `/apps/invoice/edit/${row.id}` },
                 { text: 'Nhân bản' }
               ]}
-            />
+            /> */}
           </Box>
         )
       }
